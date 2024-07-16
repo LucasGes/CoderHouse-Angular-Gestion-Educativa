@@ -1,0 +1,29 @@
+<h2 mat mat-dialog-title> Crear Curso </h2>
+
+<mat-dialog-content>
+    <form [formGroup]="courseForm">
+    <mat-form-field class="w-full">
+        <mat-label> Nombrer:  </mat-label>
+        <input formControlName="name" matInput />
+        <mat-error>El campo es obligatorio</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="w-full">
+        <mat-label>Fecha de inicio - Fecha fin</mat-label>
+        <mat-date-range-input  [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" placeholder="Fecha inicio">
+          <input matEndDate formControlName="endDate" placeholder="Fecha fin">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+     
+      </mat-form-field>
+</form>
+</mat-dialog-content>
+ 
+<mat-dialog-actions>
+    <button mat-dialog-close mat-button> Cancelar </button>
+    <button (click)="onSubmit()"mat-button> Guardar </button>
+</mat-dialog-actions>
