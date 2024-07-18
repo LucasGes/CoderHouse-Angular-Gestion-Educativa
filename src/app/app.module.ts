@@ -5,7 +5,24 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { AuthModule } from './pages/auth/auth.module';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_FORMATS, DateAdapter, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
+
+
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 
 
 
@@ -19,12 +36,15 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     AppRoutingModule,
     DashboardModule,
     AuthModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   
   ],
 
   providers: [
     provideAnimationsAsync(),
-    provideNativeDateAdapter()
+    { provide: MAT_DATE_LOCALE, useValue: 'es-AR' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ],
 
   bootstrap: [AppComponent]
