@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ResaltadoDirective } from './directives/resaltado.directive';
 import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
-
+import { TitleSizeDirective } from './directives/title-size.directive';
 
 
 @NgModule({
   declarations: [
-    ResaltadoDirective,
-    NombreCompletoPipe
+    NombreCompletoPipe,
+    TitleSizeDirective
+    
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    ResaltadoDirective,
-    NombreCompletoPipe
+     NombreCompletoPipe,
+     TitleSizeDirective
+     
+
   ]
 })
 export class SharedModule { }
