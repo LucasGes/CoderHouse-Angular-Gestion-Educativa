@@ -28,12 +28,17 @@
        <ng-container matColumnDef="acciones" class="aling-center">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let element"> 
+      
+        <button [routerLink]= "element.id" mat-icon-button>
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button (click)="editarAlumno(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
         <button (click)="deleteAlumnobyID(element.id)" mat-icon-button>
           <mat-icon>delete</mat-icon>
         </button>
-          <button (click)="editarAlumno(element)">
-          <mat-icon>edit</mat-icon>
-        </button>
+        
       </td>
     </ng-container>
     

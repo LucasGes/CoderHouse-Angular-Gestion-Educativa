@@ -4,42 +4,49 @@
     justify-content: center;
     align-items: center;
     height: 100hv;
-    background-color: rgb(180, 210, 210);
+    background-color: rgb(255, 255, 255);
     ">
 
-    <mat-card style="max-width: 400px;">
-    <mat-card-header><h1>Iniciar sesion</h1></mat-card-header>
+    <mat-card style="
+    margin-top: 100px;
+        max-width: 400px; 
+        color: rgb(180, 210, 210); 
+        background-color: rgb(110, 110, 110);
+        align-items: center; 
+        ">
+   
+        <mat-card-footer><h1>Iniciar Sesión</h1></mat-card-footer>
 
     <mat-card-content> 
-        <form>
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
 
             <mat-form-field appearance="outline" class="w-full mb-3">
                 <mat-label> E-mail </mat-label>    
-                <input matInput />
+                <input formControlName="email" matInput />
                 <mat-hint>Ingrese su correo electronico</mat-hint>
                 <mat-icon matSuffix>email</mat-icon>           
             </mat-form-field>
 
             <mat-form-field appearance="outline"  class="w-full mb-3">
                 <mat-label> Contraseña </mat-label>    
-                <input matInput />
+                <input formControlName="contraseña" matInput />
                 <mat-hint>Ingrese su contraseña</mat-hint>
                 <mat-icon matSuffix>key</mat-icon>           
             </mat-form-field>
 
             <mat-form-field class="w-full" mb-3>
                 <mat-label>Seleccione una opcion: </mat-label>
-  <select matNativeControl required>
-    <option value="volvo">Admin</option>
-    <option value="saab">User</option>
+  <select formControlName="rol" matNativeControl required>
+    <option value="ADMIN">Admin</option>
+    <option value="USER">User</option>
     
   </select>
-                
+           </mat-form-field>
+<button routerLink="/dashboard" mat-flat-button class="w-full my-1">
+Iniciar Sesión
+</button>
 
-
-            </mat-form-field>
-
-        </form>
+</form>
     </mat-card-content>
 </mat-card>
 

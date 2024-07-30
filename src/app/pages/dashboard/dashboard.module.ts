@@ -30,7 +30,8 @@ import { AlumnosModule } from './alumnos/alumnos.module';
     CursosModule,
     MatListModule,
     SharedModule,
-    AlumnosModule
+    AlumnosModule, 
+
 
   ]
 })

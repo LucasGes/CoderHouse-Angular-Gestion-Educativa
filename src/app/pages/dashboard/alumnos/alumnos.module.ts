@@ -13,12 +13,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { AlumnosDialogoComponent } from './components/alumnos-dialogo/alumnos-dialogo.component';
 import { SharedModule } from '../../../shared/shared.module';
+import { DetalleAlumnoComponent } from './detalles/detalle-alumno/detalle-alumno.component';
+import { RouterModule } from '@angular/router';
 
 
 
 
 @NgModule({
-  declarations: [AlumnosComponent, AlumnosDialogoComponent ],
+  declarations: [AlumnosComponent, AlumnosDialogoComponent, DetalleAlumnoComponent ],
 
    exports: [AlumnosComponent  ],
 
@@ -32,7 +34,8 @@ import { SharedModule } from '../../../shared/shared.module';
     MatInputModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   
   ]
 })

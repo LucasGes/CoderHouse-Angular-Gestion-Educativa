@@ -1,10 +1,14 @@
 <mat-drawer-container  class="example-container" autosize>
     <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
-      <a mat-list-item href="...">Inicio</a>
-      <a mat-list-item href="...">Cursos</a>
-      <a mat-list-item href="...">Alumnos</a>
-      <a mat-list-item href="...">Inscripciones</a>
+      <a mat-list-item routerLink="home" routerLinkActive
+      #homeLink="routerLinkActive" [activated]="homeLink.isActive" >Inicio</a>
+      <a mat-list-item routerLink="cursos" routerLinkActive
+      #cursosLink="routerLinkActive" [activated]="cursosLink.isActive" >Cursos</a>
+      <a mat-list-item routerLinkActive
+      #alumnosLink="routerLinkActive" [activated]="alumnosLink.isActive"routerLink="alumnos">Alumnos</a>
+      <a mat-list-item >Inscripciones</a>
+      <a mat-list-item routerLink="/auth" style="background-color: rgba(70, 70, 70, 0.205)">Cerrar sesión</a>
     </mat-nav-list>
     </mat-drawer>
 
@@ -15,18 +19,13 @@
             </button>
             <span>Escuela San Martin</span>
             <span class="example-spacer"></span>
-            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-              <mat-icon>favorite</mat-icon>
-            </button>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-              <mat-icon>share</mat-icon>
-            </button>
+         
           </mat-toolbar>
 
     <div class="example-sidenav-content">
-      <main class="p-5">
-           <!-- <app-cursos /> -->
-            <app-alumnos/>
+
+    <main class="p-5">
+         <router-outlet />
           </main>
       
     </div>
