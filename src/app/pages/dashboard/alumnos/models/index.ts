@@ -1,4 +1,4 @@
-export interface Alumnos{
+export interface Alumno{
 
     id: string;
     nombre: string;

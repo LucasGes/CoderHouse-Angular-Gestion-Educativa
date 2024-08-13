@@ -13,6 +13,9 @@ import { CursosModule } from './cursos/cursos.module';
 import {MatListModule} from '@angular/material/list';
 import { SharedModule } from '../../shared/shared.module';
 import { AlumnosModule } from './alumnos/alumnos.module';
+import { HomeModule } from './home/home.module';
+import { InscripcionesModule } from './inscripciones/inscripciones.module';
+
 
 @NgModule({
   declarations: [
@@ -30,9 +33,9 @@ import { AlumnosModule } from './alumnos/alumnos.module';
     CursosModule,
     MatListModule,
     SharedModule,
-    AlumnosModule, 
-
-
-  ]
+    AlumnosModule,
+    HomeModule,
+  InscripcionesModule]
+  
 })
 export class DashboardModule { }

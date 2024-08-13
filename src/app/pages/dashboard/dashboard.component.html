@@ -5,9 +5,13 @@
       #homeLink="routerLinkActive" [activated]="homeLink.isActive" >Inicio</a>
       <a mat-list-item routerLink="cursos" routerLinkActive
       #cursosLink="routerLinkActive" [activated]="cursosLink.isActive" >Cursos</a>
+
       <a mat-list-item routerLinkActive
       #alumnosLink="routerLinkActive" [activated]="alumnosLink.isActive"routerLink="alumnos">Alumnos</a>
-      <a mat-list-item >Inscripciones</a>
+
+      <a mat-list-item routerLinkActive
+      #inscripcionesLink="routerLinkActive" [activated]="inscripcionesLink.isActive"routerLink="inscripciones">Inscripciones</a>
+
       <a mat-list-item routerLink="/auth" style="background-color: rgba(70, 70, 70, 0.205)">Cerrar sesión</a>
     </mat-nav-list>
     </mat-drawer>

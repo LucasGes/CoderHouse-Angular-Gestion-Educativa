@@ -15,6 +15,7 @@ import { AlumnosDialogoComponent } from './components/alumnos-dialogo/alumnos-di
 import { SharedModule } from '../../../shared/shared.module';
 import { DetalleAlumnoComponent } from './detalles/detalle-alumno/detalle-alumno.component';
 import { RouterModule } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -35,7 +36,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     MatDatepickerModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    MatProgressSpinnerModule
   
   ]
 })

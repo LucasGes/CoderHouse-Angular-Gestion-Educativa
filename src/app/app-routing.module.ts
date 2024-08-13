@@ -6,6 +6,7 @@ import { CursosComponent } from './pages/dashboard/cursos/cursos.component';
 import { AlumnosComponent } from './pages/dashboard/alumnos/alumnos.component';
 import { DetalleAlumnoComponent } from './pages/dashboard/alumnos/detalles/detalle-alumno/detalle-alumno.component';
 import { HomeComponent } from './pages/dashboard/home/home.component';
+import { InscripcionesComponent } from './pages/dashboard/inscripciones/inscripciones.component';
 
 const routes: Routes = [
  
@@ -24,15 +25,19 @@ const routes: Routes = [
       },
       {path: 'alumnos',
         component: AlumnosComponent
-
+ 
       },
       {path: 'alumnos/:id',
         component: DetalleAlumnoComponent
       },
+      {path: 'inscripciones',
+        component: InscripcionesComponent,
+      },
+      
       {path:'**',
         redirectTo: "/dashboard/home"
-      }
-      
+      },
+     
     ]
   },
   {path:'**',

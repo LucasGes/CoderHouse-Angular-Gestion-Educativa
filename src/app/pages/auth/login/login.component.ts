@@ -9,10 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
-
   loginForm: FormGroup;
 
-constructor (private authService: AuthService, private fb:FormBuilder, ) {
+constructor (private authService: AuthService, private fb:FormBuilder ) {
 
   this.loginForm = this.fb.group ({
      email: ['', [Validators.required, Validators.email]],
@@ -22,6 +21,8 @@ constructor (private authService: AuthService, private fb:FormBuilder, ) {
 }
 
 onSubmit() {
+alert('aaaaa')
+
   if (this.loginForm.invalid){
     alert('El formulario no es valido')
   } else {

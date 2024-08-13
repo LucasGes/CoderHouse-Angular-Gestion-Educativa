@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Alumnos } from '../../models';
+import { Alumno } from '../../models';
 
 @Component({
   selector: 'app-alumnos-dialogo',
@@ -12,7 +12,7 @@ export class AlumnosDialogoComponent {
   courseForm: FormGroup;
 
   constructor(private fb: FormBuilder,private matDialogRef: MatDialogRef<AlumnosDialogoComponent>,
-    @Inject(MAT_DIALOG_DATA) public editarAlumno? : Alumnos
+    @Inject(MAT_DIALOG_DATA) public editarAlumno? : Alumno
   ) {
     this.courseForm = this.fb.group({
 
