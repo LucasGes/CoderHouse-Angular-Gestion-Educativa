@@ -12,7 +12,7 @@
       <a mat-list-item routerLinkActive
       #inscripcionesLink="routerLinkActive" [activated]="inscripcionesLink.isActive"routerLink="inscripciones">Inscripciones</a>
 
-      <a mat-list-item routerLink="/auth" style="background-color: rgba(70, 70, 70, 0.205)">Cerrar sesión</a>
+      <a mat-list-item (click)="logout()"  style="background-color: rgba(70, 70, 70, 0.205)">Cerrar sesión</a>
     </mat-nav-list>
     </mat-drawer>
 

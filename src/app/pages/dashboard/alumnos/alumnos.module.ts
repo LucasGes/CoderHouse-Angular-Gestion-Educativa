@@ -16,6 +16,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { DetalleAlumnoComponent } from './detalles/detalle-alumno/detalle-alumno.component';
 import { RouterModule } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { AlumnosRoutingModule } from './alumnos-routing.module';
 
 
 
@@ -37,8 +38,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDatepickerModule,
     SharedModule,
     RouterModule,
-    MatProgressSpinnerModule
-  
+    MatProgressSpinnerModule,
+    AlumnosRoutingModule,
   ]
 })
 

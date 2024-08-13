@@ -21,8 +21,6 @@ constructor (private authService: AuthService, private fb:FormBuilder ) {
 }
 
 onSubmit() {
-alert('aaaaa')
-
   if (this.loginForm.invalid){
     alert('El formulario no es valido')
   } else {

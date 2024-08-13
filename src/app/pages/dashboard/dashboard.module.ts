@@ -30,11 +30,9 @@ import { InscripcionesModule } from './inscripciones/inscripciones.module';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    CursosModule,
     MatListModule,
     SharedModule,
-    AlumnosModule,
-    HomeModule,
+  
   InscripcionesModule]
   
 })

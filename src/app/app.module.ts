@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { DashboardModule } from './pages/dashboard/dashboard.module';
-import { AuthModule } from './pages/auth/auth.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_DATE_FORMATS, DateAdapter, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
@@ -34,8 +32,6 @@ export const MY_DATE_FORMATS = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DashboardModule,
-    AuthModule,
     MatDatepickerModule,
     MatNativeDateModule,
   
