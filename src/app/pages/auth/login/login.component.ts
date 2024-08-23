@@ -22,7 +22,7 @@ constructor (private authService: AuthService, private fb:FormBuilder ) {
 
 onSubmit() {
   if (this.loginForm.invalid){
-    alert('El formulario no es valido')
+    alert('Usuario o contraseña incorrecto')
   } else {
 this.authService.login();
   }

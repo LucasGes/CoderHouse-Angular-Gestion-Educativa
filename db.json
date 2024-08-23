@@ -1,0 +1,14 @@
+{
+  "users": [],
+  "enrolments": [],
+  "courses": [],
+  "stduents": [
+    {
+      "id": "a3f5",
+      "nombre": "Fernando",
+      "apellido": "Sosa",
+      "fechaInscripcion": "12/12/2222"
+    }
+
+  ]
+}

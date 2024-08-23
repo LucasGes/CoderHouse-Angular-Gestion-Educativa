@@ -6,6 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_DATE_FORMATS, DateAdapter, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 
 
@@ -40,7 +41,8 @@ export const MY_DATE_FORMATS = {
   providers: [
     provideAnimationsAsync(),
     { provide: MAT_DATE_LOCALE, useValue: 'es-AR' },
-    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    provideHttpClient(withFetch())
   ],
 
   bootstrap: [AppComponent]

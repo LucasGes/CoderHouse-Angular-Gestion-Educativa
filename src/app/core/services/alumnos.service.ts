@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Alumno} from "../../pages/dashboard/alumnos/models";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
 
 
 @Injectable ({providedIn: 'root'})
@@ -8,12 +10,7 @@ import { Alumno} from "../../pages/dashboard/alumnos/models";
 export class AlumnosService{
 
   private MY_DATABASE = [
-    {id: 'a3f5',
-      nombre: 'Fernando',
-      apellido: 'Sosa',
-      fechaInscripcion: new Date(), 
-         },
- 
+    
      {id: 'j3t5',
        nombre: 'Juan',
        apellido: 'Perez',
@@ -35,20 +32,18 @@ export class AlumnosService{
 
   ]
 
+  constructor (private httpClient: HttpClient){}
+
+
 getAlumnos(): Observable<Alumno[]> {
 
-    return new Observable((observer) => {
-
-setTimeout(()=> {
-    observer.next(this.MY_DATABASE);
-    observer.complete();
-}, 1000)
-    })
+    return this.httpClient.get<Alumno[]>( environment.apiUrl + '/stduents')
+    
 }
 
 addAlumno(alumno: Alumno): Observable <Alumno[]>{
-  this.MY_DATABASE.push(alumno);
-  return this.getAlumnos();
+  
+  return this.httpClient.post<Alumno[]>( environment.apiUrl + '/stduents', alumno);
 }
 
 deleteAlumno (id:string):  Observable<Alumno[]>{
@@ -57,12 +52,10 @@ deleteAlumno (id:string):  Observable<Alumno[]>{
   return this.getAlumnos();
 }
 
-editAlumno (id: string, update: Alumno): Observable<Alumno[]> {
+editAlumno (id: string, update: Alumno) {
 
-  this.MY_DATABASE = this.MY_DATABASE.map( (el) => 
-    el.id === id ? {...update, id} : el);
-
-  return this.getAlumnos();
+    return this.httpClient.put( environment.apiUrl + '/stduents' + id, update)
+  ;
 
 
   }

@@ -1,7 +1,7 @@
-export interface Alumno{
+export interface Alumno {
 
     id: string;
     nombre: string;
-    apellido:string;
+    apellido: string;
     fechaInscripcion: Date;
-    }
+}

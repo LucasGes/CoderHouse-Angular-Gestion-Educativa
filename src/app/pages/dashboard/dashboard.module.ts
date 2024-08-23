@@ -9,18 +9,16 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import { CursosModule } from './cursos/cursos.module';
 import {MatListModule} from '@angular/material/list';
 import { SharedModule } from '../../shared/shared.module';
-import { AlumnosModule } from './alumnos/alumnos.module';
-import { HomeModule } from './home/home.module';
 import { InscripcionesModule } from './inscripciones/inscripciones.module';
+
 
 
 @NgModule({
   declarations: [
-    DashboardComponent
-  ],
+    DashboardComponent,
+     ],
   exports: [DashboardComponent],
   imports: [
     CommonModule,

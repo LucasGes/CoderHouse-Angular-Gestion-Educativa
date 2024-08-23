@@ -40,6 +40,7 @@ import { AlumnosRoutingModule } from './alumnos-routing.module';
     RouterModule,
     MatProgressSpinnerModule,
     AlumnosRoutingModule,
+
   ]
 })
 

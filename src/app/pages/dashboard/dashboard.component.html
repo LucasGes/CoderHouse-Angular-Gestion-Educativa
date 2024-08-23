@@ -1,19 +1,30 @@
 <mat-drawer-container  class="example-container" autosize>
     <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
+
       <a mat-list-item routerLink="home" routerLinkActive
       #homeLink="routerLinkActive" [activated]="homeLink.isActive" >Inicio</a>
+
+      <a 
+    
+      mat-list-item routerLink="usuarios" routerLinkActive
+      #usuariosLink="routerLinkActive" [activated]="usuariosLink.isActive" >Usuarios</a>
+
       <a mat-list-item routerLink="cursos" routerLinkActive
       #cursosLink="routerLinkActive" [activated]="cursosLink.isActive" >Cursos</a>
 
-      <a mat-list-item routerLinkActive
-      #alumnosLink="routerLinkActive" [activated]="alumnosLink.isActive"routerLink="alumnos">Alumnos</a>
+      <a mat-list-item routerLink="alumnos" routerLinkActive
+      #alumnosLink="routerLinkActive" [activated]="alumnosLink.isActive">Alumnos</a>
 
       <a mat-list-item routerLinkActive
       #inscripcionesLink="routerLinkActive" [activated]="inscripcionesLink.isActive"routerLink="inscripciones">Inscripciones</a>
 
       <a mat-list-item (click)="logout()"  style="background-color: rgba(70, 70, 70, 0.205)">Cerrar sesión</a>
     </mat-nav-list>
+
+   
+     {{authUser$ | async | json}}
+
     </mat-drawer>
 
         <mat-toolbar >
@@ -33,6 +44,8 @@
           </main>
       
     </div>
+
+    
   
   </mat-drawer-container>
 

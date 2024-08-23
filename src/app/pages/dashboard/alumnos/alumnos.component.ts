@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { AlumnosDialogoComponent } from './components/alumnos-dialogo/alumnos-dialogo.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Alumno } from './models';
 import { generateID } from '../../../shared/utils';
 import { AlumnosService } from '../../../core/services/alumnos.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+import { tap } from 'rxjs';
 
 
 
@@ -17,96 +20,90 @@ export class AlumnosComponent implements OnInit {
 
   isLoading = false;
 
-  
-  constructor(private matDialog: MatDialog, private AlumnosService: AlumnosService){}
-  
-ngOnInit(): void{
-this.loadAlumnos();
-}
+  constructor(private matDialog: MatDialog, private AlumnosService: AlumnosService, private httpClient: HttpClient ) { }
 
-
-loadAlumnos() {
-  this.isLoading = true;
+  ngOnInit(): void {
+    this.loadAlumnos();
+  }
+  loadAlumnos() {
+    this.isLoading = true;
     this.AlumnosService.getAlumnos().subscribe({
-      next:(alumnos) =>{
+      next: (alumnos) => {
         this.dataSource = alumnos;
       },
       complete: () => {
-       this.isLoading = false;
+        this.isLoading = false;
       }
     })
-  
+
   }
 
 
   nombreCurso = ""
+  
 
-    
-openDialog(): void{
-  this.matDialog.open(AlumnosDialogoComponent).afterClosed().subscribe({
+  openDialog(): void {
+    this.matDialog.open(AlumnosDialogoComponent).afterClosed().subscribe({
 
-    next: (value) => {
-      
-      this.nombreCurso = value.name;
+      next: (value) => {
 
-      value['id'] = generateID(4);
+        this.nombreCurso = value.name;
 
-      this.isLoading = true;
-      this.AlumnosService.addAlumno(value).subscribe({
-        next: (alumnos) => {
+        value['id'] = generateID(4);
 
-          this.dataSource = [...alumnos];
+        this.isLoading = true;
+        this.AlumnosService.addAlumno(value).pipe(tap(()=>this.loadAlumnos())).subscribe({
+          next: (alumnos) => {
 
-        },
-        
-complete: () => {
-  this.isLoading = false;
-}
-       
-      })
-
-      
-
-    }
-  })
-}
+            this.httpClient.post(environment.apiUrl + '/stduents', alumnos);
+          },
+          complete: () => {
+            this.isLoading = false;
+          }
+        })
+      }
+    })
+  }
 
 
-  displayedColumns: string[] = ['id', 'nombreCompleto', 'fechaInscripcion',  'acciones'];
+  displayedColumns: string[] = ['id', 'nombreCompleto', 'fechaInscripcion', 'acciones'];
   dataSource: Alumno[] = [];
 
- editarAlumno(alumnoAEditar:Alumno){
-this.matDialog.open(AlumnosDialogoComponent, {data: alumnoAEditar}).afterClosed().subscribe({
-  next: (value) => {
-    this.isLoading = true;
-    if(!!value) {
-      this.AlumnosService.editAlumno(alumnoAEditar.id, value).subscribe({
+  editarAlumno(alumnoAEditar: Alumno, id: string) {
+    this.matDialog.open(AlumnosDialogoComponent, { data: alumnoAEditar }).afterClosed().subscribe({
+      next: (value) => {
+        this.isLoading = true;
+        if (!!value) {
+          this.AlumnosService.editAlumno(alumnoAEditar.id, value).pipe(tap(()=>this.loadAlumnos())).subscribe({
+            next: (alumnos) => {
+              this.httpClient.put(environment.apiUrl + '/stduents' + id, alumnoAEditar)
+            },
+            complete: () => {
+              this.isLoading = false;
+            },
+
+
+          })
+        }
+      }
+    });
+
+  }
+
+
+  deleteAlumnobyID(id: string) {
+    if (confirm('Desea eliminar el alumno?')) {
+      this.isLoading = true;
+
+      this.AlumnosService.deleteAlumno(id).subscribe({
         next: (alumnos) => {
-          this.dataSource = [...alumnos];},
-        complete: () =>{
+          this.dataSource = [...alumnos];
+        },
+        complete: () => {
           this.isLoading = false;
         },
-
-
-      })
+      });
     }
   }
- });
-
- } 
-
-
-deleteAlumnobyID(id: string){
-  if (confirm('Desea eliminar el alumno?')){
-    this.isLoading= true;
-
-  this.AlumnosService.deleteAlumno(id).subscribe({
-    next: (alumnos) => {
-      this.dataSource = [...alumnos];},
-    complete: () =>{
-      this.isLoading = false;
-    },
-    });
-  }}
 
 }
