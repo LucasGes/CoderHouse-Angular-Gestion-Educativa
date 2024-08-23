@@ -8,7 +8,12 @@
       "nombre": "Fernando",
       "apellido": "Sosa",
       "fechaInscripcion": "12/12/2222"
+    },
+    {
+      "nombre": "Jose",
+      "apellido": "Lopez",
+      "fechaInscripcion": "2024-08-31T03:00:00.000Z",
+      "id": "5925"
     }
-
   ]
 }

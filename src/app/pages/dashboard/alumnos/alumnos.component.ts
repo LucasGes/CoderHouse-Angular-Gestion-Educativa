@@ -52,15 +52,7 @@ export class AlumnosComponent implements OnInit {
         value['id'] = generateID(4);
 
         this.isLoading = true;
-        this.AlumnosService.addAlumno(value).pipe(tap(()=>this.loadAlumnos())).subscribe({
-          next: (alumnos) => {
-
-            this.httpClient.post(environment.apiUrl + '/stduents', alumnos);
-          },
-          complete: () => {
-            this.isLoading = false;
-          }
-        })
+        this.AlumnosService.addAlumno(value).pipe(tap(()=>this.loadAlumnos())).subscribe();
       }
     })
   }
@@ -69,21 +61,12 @@ export class AlumnosComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombreCompleto', 'fechaInscripcion', 'acciones'];
   dataSource: Alumno[] = [];
 
-  editarAlumno(alumnoAEditar: Alumno, id: string) {
+  editarAlumno(alumnoAEditar: Alumno) {
     this.matDialog.open(AlumnosDialogoComponent, { data: alumnoAEditar }).afterClosed().subscribe({
       next: (value) => {
         this.isLoading = true;
         if (!!value) {
-          this.AlumnosService.editAlumno(alumnoAEditar.id, value).pipe(tap(()=>this.loadAlumnos())).subscribe({
-            next: (alumnos) => {
-              this.httpClient.put(environment.apiUrl + '/stduents' + id, alumnoAEditar)
-            },
-            complete: () => {
-              this.isLoading = false;
-            },
-
-
-          })
+          this.AlumnosService.editAlumno(alumnoAEditar.id, value).pipe(tap(()=> {this.loadAlumnos()})).subscribe();
         }
       }
     });
@@ -95,14 +78,7 @@ export class AlumnosComponent implements OnInit {
     if (confirm('Desea eliminar el alumno?')) {
       this.isLoading = true;
 
-      this.AlumnosService.deleteAlumno(id).subscribe({
-        next: (alumnos) => {
-          this.dataSource = [...alumnos];
-        },
-        complete: () => {
-          this.isLoading = false;
-        },
-      });
+      this.AlumnosService.deleteAlumno(id).pipe(tap(()=> {this.loadAlumnos()})).subscribe();
     }
   }
 
