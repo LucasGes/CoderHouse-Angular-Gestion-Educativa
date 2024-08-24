@@ -20,7 +20,7 @@ export class AlumnosComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(private matDialog: MatDialog, private AlumnosService: AlumnosService, private httpClient: HttpClient ) { }
+  constructor(private matDialog: MatDialog, private AlumnosService: AlumnosService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.loadAlumnos();
@@ -40,7 +40,7 @@ export class AlumnosComponent implements OnInit {
 
 
   nombreCurso = ""
-  
+
 
   openDialog(): void {
     this.matDialog.open(AlumnosDialogoComponent).afterClosed().subscribe({
@@ -52,7 +52,7 @@ export class AlumnosComponent implements OnInit {
         value['id'] = generateID(4);
 
         this.isLoading = true;
-        this.AlumnosService.addAlumno(value).pipe(tap(()=>this.loadAlumnos())).subscribe();
+        this.AlumnosService.addAlumno(value).pipe(tap(() => this.loadAlumnos())).subscribe();
       }
     })
   }
@@ -66,7 +66,7 @@ export class AlumnosComponent implements OnInit {
       next: (value) => {
         this.isLoading = true;
         if (!!value) {
-          this.AlumnosService.editAlumno(alumnoAEditar.id, value).pipe(tap(()=> {this.loadAlumnos()})).subscribe();
+          this.AlumnosService.editAlumno(alumnoAEditar.id, value).pipe(tap(() => { this.loadAlumnos() })).subscribe();
         }
       }
     });
@@ -78,7 +78,7 @@ export class AlumnosComponent implements OnInit {
     if (confirm('Desea eliminar el alumno?')) {
       this.isLoading = true;
 
-      this.AlumnosService.deleteAlumno(id).pipe(tap(()=> {this.loadAlumnos()})).subscribe();
+      this.AlumnosService.deleteAlumno(id).pipe(tap(() => { this.loadAlumnos() })).subscribe();
     }
   }
 

@@ -11,11 +11,11 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-constructor (private authService: AuthService, private fb:FormBuilder ) {
+constructor (public authService: AuthService, private fb:FormBuilder ) {
 
   this.loginForm = this.fb.group ({
      email: ['', [Validators.required, Validators.email]],
-     contraseña: ['', [Validators.required]],
+     contrasena: ['', [Validators.required]],
      rol: ['ADMIN', [Validators.required]]
   });
 }
