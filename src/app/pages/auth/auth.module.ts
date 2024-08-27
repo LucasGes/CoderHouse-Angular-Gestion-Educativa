@@ -26,7 +26,7 @@ import { AuthService } from '../../core/services/auth.service';
     MatButtonModule,
     ReactiveFormsModule
   ],
-  providers:[AuthService]
+  providers:[]
 
 })
 export class AuthModule { }

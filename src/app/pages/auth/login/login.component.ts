@@ -16,7 +16,6 @@ constructor (public authService: AuthService, private fb:FormBuilder ) {
   this.loginForm = this.fb.group ({
      email: ['', [Validators.required, Validators.email]],
      contrasena: ['', [Validators.required]],
-     rol: ['ADMIN', [Validators.required]]
   });
 }
 
@@ -24,7 +23,11 @@ onSubmit() {
   if (this.loginForm.invalid){
     alert('Usuario o contraseña incorrecto')
   } else {
-this.authService.login();
+    const data= { 
+      email:this.loginForm.get('email')?.value, 
+      password: this.loginForm.get('contrasena')?.value
+    }
+this.authService.login(data);
   }
 }
 

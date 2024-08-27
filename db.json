@@ -1,5 +1,24 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "asd1",
+      "nombre": "Lucas",
+      "apellido": "Ges",
+      "email": "lucasges@gmail.com",
+      "password": "123456",
+      "rol": "ADMIN",
+      "token": "asdqwe123aas·$%1sad"
+    },
+    {
+      "id": "asd2",
+      "nombre": "Leo",
+      "apellido": "Garcia",
+      "email": "leogar@gmail.com",
+      "contrasena": "123456",
+      "rol": "USER",
+      "token": "asqqwer4gfde123aaasds·$%1sad"
+    }
+  ],
   "enrolments": [],
   "courses": [],
   "stduents": [

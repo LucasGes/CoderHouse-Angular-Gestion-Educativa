@@ -1,7 +1,11 @@
 export type UserRol = 'ADMIN' | 'USER';
 
 export interface Usuario {
+    id: string;
+    nombre: string;
+    apellido: string;
     email: string;
-    password: string;
+    contrasena: string;
     rol: UserRol;
+    token: string;
 }
