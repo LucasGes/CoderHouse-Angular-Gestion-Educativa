@@ -5,20 +5,26 @@ import { Usuario } from '../../pages/dashboard/usuarios/models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { NotifierService } from './notifier.service';
+import { Store } from '@ngrx/store';
+import { RootState } from '../store';
+import { setAuthUser, unsetAuthUser } from '../store/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private VALID_TOKEN = '1234567890';
-
   private _authUser$ = new BehaviorSubject<Usuario | null>(null);
 
   authUser$ = this._authUser$.asObservable();
 
 
-  constructor(private httpClient: HttpClient, private router: Router, private notifier: NotifierService) { }
+  constructor(
+    private httpClient: HttpClient, 
+    private router: Router, 
+    private notifier: NotifierService,
+    private store: Store<RootState>
+  ) { }
 
 
   login(data: { email: string; password: string }) {
@@ -34,8 +40,10 @@ export class AuthService {
         if (!response.length) {
           alert('Usuario o contraseña incorrecto')
         } else {
+
           const authUser = response[0];
           localStorage.setItem('token', authUser.token)
+          this.store.dispatch(setAuthUser({payload: authUser})),
           this._authUser$.next(authUser)
           this.router.navigate(['dashboard', 'home'])
         }
@@ -81,6 +89,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    this.store.dispatch(unsetAuthUser());
     this._authUser$.next(null);
     this.router.navigate(['auth', 'login'])
 

@@ -46,16 +46,15 @@
         routerLink="inscripciones"
         >Inscripciones</a
       >
-
+<br/>
       <a
         mat-list-item
         (click)="logout()"
-        style="background-color: rgba(70, 70, 70, 0.205)"
+        style="text-align: center; background-color: rgba(70, 70, 70, 0.205)"
         >Cerrar sesión</a
       >
     </mat-nav-list>
 
-    {{ authUser$ | async | json }}
   </mat-drawer>
 
   <mat-toolbar>
