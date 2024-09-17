@@ -1,0 +1,24 @@
+  
+  .welcome-message {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 6rem; 
+    font-weight: bold;
+    color: #dadada; 
+    text-shadow: 3px 3px 5px rgba(142, 253, 253, 0.877);
+    text-align: center; 
+    margin-top: 20px;
+    animation: fadeIn 1.5s ease-in-out; 
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  

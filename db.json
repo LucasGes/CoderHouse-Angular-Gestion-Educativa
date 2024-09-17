@@ -20,7 +20,24 @@
     }
   ],
   "enrolments": [],
-  "courses": [],
+  "courses": [
+    {
+      "id": "5858",
+      "nombre": "Angular",
+      "docente": "Franco Perez",
+      "alumnos": "30",
+      "fechaInicio": "2024-01-02T03:00:00.000Z",
+      "fechaFin": "2024-05-30T03:00:00.000Z"
+    },
+    {
+      "id": "1537",
+      "nombre": "Java",
+      "docente": "Leonardo Franco",
+      "alumnos": 52,
+      "fechaInicio": "2024-12-18T03:00:00.000Z",
+      "fechaFin": "2024-12-25T03:00:00.000Z"
+    }
+  ],
   "stduents": [
     {
       "id": "a3f5",

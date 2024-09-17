@@ -67,10 +67,11 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span>Escuela San Martin</span>
-    <span class="example-spacer"></span>
+    <span class="spacer"></span>
 
     @if (authUser$ | async; as user) {
-    <span>
+     <mat-icon>person</mat-icon>
+    <span style= "margin-right: 20px;">
       {{ user.nombre + " " + user.apellido }}
     </span>
     }

@@ -2,13 +2,7 @@
 
 <h2 appTitleSize>Lista de Alumnos</h2>
 
-<!-- @if (isLoading){
-
-<mat-spinner></mat-spinner>}
-
-@else{ -->
-
-  
+ 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="id">
@@ -21,11 +15,6 @@
     <th mat-header-cell *matHeaderCellDef> Nombre y Apellido</th>
     <td mat-cell *matCellDef="let element"> {{element | nombreCompleto}} </td>
   </ng-container>
-
-  <!-- <ng-container matColumnDef="apellido">
-    <th mat-header-cell *matHeaderCellDef> Apellido </th>
-    <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-  </ng-container> -->
 
      <ng-container matColumnDef="fechaInscripcion">
     <th mat-header-cell *matHeaderCellDef> Fecha de inscripcion </th>
@@ -55,8 +44,7 @@
 
 <div style="margin-top: 20px;">
   <button (click)="openDialog()" mat-flat-button>
-    <mat-icon>add</mat-icon> Agregar Alumno
-  </button>
+    <mat-icon>add</mat-icon> Agregar Alumno </button>
 </div>
 
 

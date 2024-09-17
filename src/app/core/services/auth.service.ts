@@ -14,11 +14,6 @@ import { setAuthUser, unsetAuthUser } from '../store/auth/auth.actions';
 })
 export class AuthService {
 
-  private _authUser$ = new BehaviorSubject<Usuario | null>(null);
-
-  authUser$ = this._authUser$.asObservable();
-
-
   constructor(
     private httpClient: HttpClient, 
     private router: Router, 
@@ -44,7 +39,7 @@ export class AuthService {
           const authUser = response[0];
           localStorage.setItem('token', authUser.token)
           this.store.dispatch(setAuthUser({payload: authUser})),
-          this._authUser$.next(authUser)
+         
           this.router.navigate(['dashboard', 'home'])
         }
       },
@@ -56,6 +51,7 @@ export class AuthService {
 
   verificarToken(): Observable<boolean> {
     const token = localStorage.getItem('token');
+    
     if (!token) {
       return of(false);
     }
@@ -70,33 +66,22 @@ export class AuthService {
           return false;
         } else {
           const authUser = response[0];
-          localStorage.setItem('token', authUser.token)
-          this._authUser$.next(authUser)
+          localStorage.setItem('token', authUser.token);
+          this.store.dispatch(setAuthUser({payload: authUser}));
+       
           return true;
         }
       })
     )
   }
 
-  verificarUsuario(): Observable<Usuario | null> {
-    const token = localStorage.getItem(`token`);
-    if (token) {
-      //  this._authUser$.next(this.FAKE_USER)
-    }
-    return this.authUser$;
-
-  }
 
   logout() {
     localStorage.removeItem('token');
     this.store.dispatch(unsetAuthUser());
-    this._authUser$.next(null);
     this.router.navigate(['auth', 'login'])
 
   }
 
-}
-function Usuario(arg0: null) {
-  throw new Error('Function not implemented.');
 }
 
