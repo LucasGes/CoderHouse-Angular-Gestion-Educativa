@@ -25,8 +25,9 @@ $pf-gesqua-escSanMartin-theme: mat.define-theme((
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-:root {
+:root  {
   @include mat.all-component-themes($pf-gesqua-escSanMartin-theme);
+
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.
@@ -39,3 +40,13 @@ $pf-gesqua-escSanMartin-theme: mat.define-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+  
+h2{
+  background-color: rgb(58, 58, 58);
+  border-radius: 10px;
+  font-family: sans-serif;
+  font-size: 20PX;
+  text-align: center;
+}

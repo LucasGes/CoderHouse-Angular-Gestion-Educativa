@@ -1,0 +1,16 @@
+<mat-card *ngIf="user">
+  <h2 style="color: white;"> {{ user | nombreCompleto }}</h2>
+  <mat-card-header>
+    <div
+      mat-card-avatar
+      class="profile-avatar"
+    ></div>
+    <mat-card-subtitle>Rol: {{ user.rol }}</mat-card-subtitle>
+    <mat-card-subtitle>Email: {{ user.email }}</mat-card-subtitle>
+  </mat-card-header>
+ 
+  <mat-dialog-actions fxLayoutAlign="end center">
+    <button mat-dialog-close mat-button>Volver</button>
+
+  </mat-dialog-actions>
+</mat-card>

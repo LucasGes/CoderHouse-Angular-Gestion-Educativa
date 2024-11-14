@@ -20,5 +20,22 @@
       transform: translateY(0);
     }
   }
+  .logo {
+    width: 12cm;
+    height: 12cm;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   }
+   .list{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+   }
 
+   .button {
+    font-size: 18px;
+    padding: 12px 24px;
+    color: white;
+   }
   

@@ -1,0 +1,64 @@
+<h1 mat-dialog-title> 
+    {{ editarUsuario ? "Editando: "  : "Crear Usuario" }} 
+  </h1>
+  
+  <mat-dialog-content>
+    <form [formGroup]="userForm">
+
+
+      <mat-form-field class="w-full">
+        <mat-label> Nombre:  </mat-label>
+        <input formControlName="nombre" matInput />
+        <mat-error>El campo es obligatorio</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="w-full">
+        <mat-label> Apellido:  </mat-label>
+        <input formControlName="apellido" matInput />
+        <mat-error>El campo es obligatorio</mat-error>
+      </mat-form-field>
+
+      
+      <mat-form-field class="w-full">
+        <mat-label> Email:  </mat-label>
+        <input formControlName="email" matInput />
+        <mat-error>Ingrese un email valido</mat-error>
+      </mat-form-field>
+   
+   
+      <mat-form-field>
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="rol">
+          <mat-option [value]="'ADMIN'">Administrador</mat-option>
+          <mat-option [value]="'USER'">Usuario</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="hide() ? 'password' : 'text'" 
+        formControlName="contrasena"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+        >
+          <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+          
+        </button>
+        <mat-error>Incluir: mínimo de 6 caracteres, una mayuscula y 3 numeros o simbolos</mat-error>
+      </mat-form-field>
+
+    </form>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions>
+    <button mat-dialog-close mat-button> Cancelar </button>
+    <button (click)="onSubmit()" mat-button> Guardar </button>
+  </mat-dialog-actions>
+  

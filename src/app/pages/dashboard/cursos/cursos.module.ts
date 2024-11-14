@@ -12,8 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
-import { MatNativeDateModule } from '@angular/material/core';
-import { DetallesComponent } from './detalles/detalles.component';
+import { MatNativeDateModule, MatOption } from '@angular/material/core';
+import { CourseDetallesDialogoComponent } from './components/course-detalles-dialogo/course-detalles-dialogo.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelect } from '@angular/material/select';
 
 
 
@@ -21,7 +23,8 @@ import { DetallesComponent } from './detalles/detalles.component';
   declarations: [
     CursosComponent,
     CourseDialogoComponent,
-    DetallesComponent
+    CourseDetallesDialogoComponent,
+    CourseDetallesDialogoComponent
   ],
 
   exports: [CursosComponent],
@@ -38,7 +41,10 @@ import { DetallesComponent } from './detalles/detalles.component';
     MatDatepickerModule,
     MatTableModule,
     MatNativeDateModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatSelect,
+    MatOption
    
     ]
     

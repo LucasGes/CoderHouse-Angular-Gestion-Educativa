@@ -4,4 +4,5 @@ export interface Alumno {
     nombre: string;
     apellido: string;
     fechaInscripcion: Date;
+    cursos: string[];
 }

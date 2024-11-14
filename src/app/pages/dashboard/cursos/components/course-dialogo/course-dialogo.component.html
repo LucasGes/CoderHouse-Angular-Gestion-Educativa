@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>
+<h1 mat-dialog-title>
   {{ editarCurso ? "Editando: " : "Crear Curso" }}
-</h2>
+</h1>
 
 <mat-dialog-content>
   <form [formGroup]="courseForm">
@@ -17,8 +17,8 @@
     </mat-form-field>
 
     <mat-form-field class="w-full">
-      <mat-label>Cantidad de alumnos:</mat-label>
-      <input formControlName="alumnos" type="number" min="0" matInput />
+      <mat-label>Cantidad de Horas:</mat-label>
+      <input formControlName="horas" type="number" min="0" matInput />
       <mat-error>El campo es obligatorio</mat-error>
     </mat-form-field>
 

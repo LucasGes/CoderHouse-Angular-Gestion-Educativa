@@ -8,4 +8,5 @@ export interface Usuario {
     contrasena: string;
     rol: UserRol;
     token: string;
+    fotoPerfil: string;
 }

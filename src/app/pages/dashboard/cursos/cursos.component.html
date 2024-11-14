@@ -1,4 +1,4 @@
-<h2 appTitleSize>Lista de Cursos</h2>
+<h2>CURSOS</h2>
 
  
 <table mat-table [dataSource]= "dataSource" class="mat-elevation-z8">
@@ -10,41 +10,26 @@
 
  
   <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> Nombre del Curso</th>
+    <th mat-header-cell *matHeaderCellDef> CURSO </th>
     <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
   </ng-container>
 
   <ng-container matColumnDef="docente">
-    <th mat-header-cell *matHeaderCellDef> Docente a cargo</th>
+    <th mat-header-cell *matHeaderCellDef> DOCENTE</th>
     <td mat-cell *matCellDef="let element"> {{element.docente}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="alumnos">
-    <th mat-header-cell *matHeaderCellDef> Cant. alumnos</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center;" > {{element.alumnos}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="fechaInicio">
-    <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
-    <td mat-cell *matCellDef="let element"> {{element.fechaInicio | date: 'dd/MM/yyyy'}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="fechaFin">
-    <th mat-header-cell *matHeaderCellDef> Fecha de fin </th>
-    <td mat-cell *matCellDef="let element"> {{element.fechaFin | date: 'dd/MM/yyyy'}} </td>
-  </ng-container>
-
-     <ng-container matColumnDef="acciones" class="aling-center">
-    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+  <ng-container matColumnDef="acciones" class="aling-center">
+    <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
     <td mat-cell *matCellDef="let element"> 
     
-      <button [routerLink]= "element.id" mat-icon-button>
+      <button (click)="verCurso(element)">
         <mat-icon>visibility</mat-icon>
       </button>
-      <button (click)="editarAlumno(element)">
+      <button (click)="editarCurso(element)" *ngIf="(authUser$ | async)?.rol === 'ADMIN'">
         <mat-icon>edit</mat-icon>
       </button>
-      <button (click)="deleteAlumnobyID(element.id)" mat-icon-button>
+      <button (click)="deleteCursobyID(element.id)" *ngIf="(authUser$ | async)?.rol === 'ADMIN'">
         <mat-icon>delete</mat-icon>
       </button>
       
@@ -56,7 +41,7 @@
 </table>
 
 <div style="margin-top: 20px;">
-    <button (click)="openDialog()" mat-flat-button>
+    <button (click)="openDialog()" mat-flat-button *ngIf="(authUser$ | async)?.rol === 'ADMIN'">
         <mat-icon>add</mat-icon> Crear curso </button>
 </div>
 

@@ -1,46 +1,51 @@
 <div
     style="
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100hv;
-    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    height: 100vh; /* Corregido de 100hv a 100vh */
+    background-color: #1a1b1f;
+    padding: 20px;
+    ">
+
+
+    <img src="assets/images/Logo2.png" alt="Logo Escuela San Martín" class="logo" style="
+      
+        height: auto;
+        margin-right: 50px; /* Espacio entre logo y formulario */
     ">
 
     <mat-card style="
-    margin-top: 100px;
-        max-width: 400px; 
-        color: rgb(180, 210, 210); 
-        background-color: rgb(110, 110, 110);
-        align-items: center; 
-        ">
-   
+        max-width: 400px;
+        color: rgb(180, 210, 210);
+        background-color: rgb(26, 25, 25);
+        align-items: center;
+    ">
         <mat-card-footer><h1>Iniciar Sesión</h1></mat-card-footer>
 
-    <mat-card-content> 
-        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+        <mat-card-content>
+            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
 
-            <mat-form-field appearance="outline" class="w-full mb-3">
-                <mat-label> E-mail </mat-label>    
-                <input formControlName="email" matInput />
-                <mat-hint>Ingrese su correo electronico</mat-hint>
-                <mat-icon matSuffix>email</mat-icon>           
-            </mat-form-field>
+                <mat-form-field appearance="outline" class="w-full mb-3">
+                    <mat-label> E-mail </mat-label>
+                    <input formControlName="email" matInput />
+                    <mat-hint>Ingrese su correo electronico</mat-hint>
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
 
-            <mat-form-field appearance="outline"  class="w-full mb-3">
-                <mat-label> Contraseña </mat-label>    
-                <input type= "password" formControlName="contrasena" matInput />
-                <mat-hint>Ingrese su contraseña</mat-hint>
-                <mat-icon matSuffix>key</mat-icon>           
-            </mat-form-field>
+                <mat-form-field appearance="outline" class="w-full mb-3">
+                    <mat-label> Contraseña </mat-label>
+                    <input type="password" formControlName="contrasena" matInput />
+                    <mat-hint>Ingrese su contraseña</mat-hint>
+                    <mat-icon matSuffix>key</mat-icon>
+                </mat-form-field>
 
-         
-<button routerLink="/dashboard" mat-flat-button class="w-full my-1">
-Iniciar Sesión
-</button>
+                <button routerLink="/dashboard" mat-flat-button class="w-full my-1">
+                    Iniciar Sesión
+                </button>
 
-</form>
-    </mat-card-content>
-</mat-card>
+            </form>
+        </mat-card-content>
+    </mat-card>
 
 </div>

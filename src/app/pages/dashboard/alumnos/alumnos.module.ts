@@ -11,18 +11,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { AlumnosDialogoComponent } from './components/alumnos-dialogo/alumnos-dialogo.component';
 import { SharedModule } from '../../../shared/shared.module';
-import { DetalleAlumnoComponent } from './detalles/detalle-alumno/detalle-alumno.component';
 import { RouterModule } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AlumnosRoutingModule } from './alumnos-routing.module';
+import { AlumnosDetallesDialogoComponent } from './components/alumnos-detalles-dialogo/alumnos-detalles-dialogo.component';
+import { MatCardModule } from '@angular/material/card';
+import { AlumnosDialogoComponent } from './components/alumnos-dialogo/alumnos-dialogo.component';
 
 
 
 
 @NgModule({
-  declarations: [AlumnosComponent, AlumnosDialogoComponent, DetalleAlumnoComponent ],
+  declarations: [AlumnosComponent, AlumnosDetallesDialogoComponent, AlumnosDialogoComponent,  ],
 
    exports: [AlumnosComponent  ],
 
@@ -40,6 +41,7 @@ import { AlumnosRoutingModule } from './alumnos-routing.module';
     RouterModule,
     MatProgressSpinnerModule,
     AlumnosRoutingModule,
+    MatCardModule
 
   ]
 })

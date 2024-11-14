@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CursosComponent } from './cursos.component';
-import { DetallesComponent } from './detalles/detalles.component';
+import { CourseDetallesDialogoComponent } from './components/course-detalles-dialogo/course-detalles-dialogo.component';
+
 
 const routes: Routes = [  {
   path: '',
@@ -9,7 +10,7 @@ const routes: Routes = [  {
   },
   {
     path: ':id',
-    component: DetallesComponent,
+    component: CourseDetallesDialogoComponent,
     
     }
   ];

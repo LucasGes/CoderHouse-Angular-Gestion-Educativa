@@ -1,0 +1,20 @@
+<h2>DESUSCRIPCIONES</h2>
+
+<mat-form-field appearance="fill">
+  <mat-label>Alumno</mat-label>
+  <mat-select [(ngModel)]="selectedAlumnoId" (selectionChange)="cargarCursos()" required>
+    <mat-option *ngFor="let alumno of alumnos" [value]="alumno.id">{{ alumno.nombre }} {{ alumno.apellido }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Curso</mat-label>
+  <mat-select [(ngModel)]="selectedCursoId" required>
+    <mat-option *ngFor="let curso of cursos" [value]="curso.id">{{ curso.nombre }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-dialog-actions>
+  <button mat-dialog-close mat-button>Cancelar</button>
+  <button (click)="onSubmit()" mat-button>Desuscribir</button>
+</mat-dialog-actions>

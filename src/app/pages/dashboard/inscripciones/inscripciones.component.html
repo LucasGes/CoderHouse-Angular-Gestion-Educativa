@@ -1,49 +1,24 @@
-<h1>Inscripciones</h1>
-<hr>
-<pre>
-    @if (isLoading) {
-        <mat-spinner></mat-spinner>
-    }@else {
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<h2>INSCRIPCIONES</h2>
 
-            <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> ID </th>
-              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            </ng-container>
-          
-           
-            <ng-container matColumnDef="alumno">
-              <th mat-header-cell *matHeaderCellDef> Alumno</th>
-              <td mat-cell *matCellDef="let element"> {{element.alumno}} </td>
-            </ng-container>
-          
-           <ng-container matColumnDef="curso">
-              <th mat-header-cell *matHeaderCellDef> Curso </th>
-              <td mat-cell *matCellDef="let element"> {{element.curso}} </td>
-            </ng-container>
-          
-               <ng-container matColumnDef="fechaInscripcion">
-              <th mat-header-cell *matHeaderCellDef> Fecha de inscripcion </th>
-              <td mat-cell *matCellDef="let element"> {{element.fechaInscripcion | date: 'dd/MM/YYYY'}} </td>
-            </ng-container>
-          
-               <ng-container matColumnDef="acciones" class="aling-center">
-              <th mat-header-cell *matHeaderCellDef> Acciones </th>
-              <td mat-cell *matCellDef="let element"> 
-              
-              </td>
-            </ng-container>
-            
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+<div *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
 
- <!--{{inscripciones | json}}-->
-    }
-</pre>
+<div *ngIf="!isLoading">
+    <p class="mat-body-1" style=" text-align: center; color: white;"> CANTIDAD DE ALUMNOS: {{ totalAlumnos }}</p>
+</div>
+
+
 
 <div style="margin-top: 20px;">
-<button (click)="openDialog()" mat-flat-button>
-    <mat-icon>add</mat-icon> Agregar Inscripcion
-  </button>
+    <button (click)="openDialogI()" mat-flat-button>
+        <mat-icon>add</mat-icon> INSCRIBIR
+    </button>
+</div>
+
+<div style="margin-top: 20px;">
+    <button (click)="openDialogD()" mat-flat-button>
+        <mat-icon>delete</mat-icon> DESUSCRIBIR
+    </button>
+    
 </div>

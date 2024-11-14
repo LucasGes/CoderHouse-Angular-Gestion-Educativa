@@ -6,6 +6,9 @@ import { generateID } from '../../../shared/utils';
 import { AlumnosService } from '../../../core/services/alumnos.service';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { AlumnosDetallesDialogoComponent } from './components/alumnos-detalles-dialogo/alumnos-detalles-dialogo.component';
+import { CursosService } from '../../../core/services/cursos.service';
+import { Curso } from '../cursos/models';
 
 
 @Component({
@@ -15,11 +18,18 @@ import { tap } from 'rxjs';
 })
 export class AlumnosComponent implements OnInit {
 
-  constructor(private matDialog: MatDialog, private alumnosService: AlumnosService, private httpClient: HttpClient) { }
+  constructor(
+    
+    private matDialog: MatDialog, 
+    private alumnosService: AlumnosService, 
+    private httpClient: HttpClient,
+    private cursoService: CursosService) { }
 
   ngOnInit(): void {
     this.loadAlumnos();
   }
+
+  
   loadAlumnos() {
 
     this.alumnosService.getAlumnos().subscribe({
@@ -31,7 +41,7 @@ export class AlumnosComponent implements OnInit {
   }
 
 
-  nombreCurso = ""
+  nombreAlumno = ""
 
 
   openDialog(): void {
@@ -39,7 +49,7 @@ export class AlumnosComponent implements OnInit {
 
       next: (value) => {
 
-        this.nombreCurso = value.name;
+        this.nombreAlumno = value.name;
 
         value['id'] = generateID(4);
 
@@ -63,12 +73,26 @@ export class AlumnosComponent implements OnInit {
       }
     });
 
+  
   }
 
+  verAlumno (alumno  : Alumno){
+    this.matDialog.open(AlumnosDetallesDialogoComponent, { data: alumno }).afterClosed().subscribe({
+      next: (value) => {
 
+        if (!!value) {
+          this.loadAlumnos();
+        }
+      }
+  });
+  }
+    
   deleteAlumnobyID(id: string) {
+   
     if (confirm('Desea eliminar el alumno?')) {
       this.alumnosService.deleteAlumno(id).pipe(tap(() => { this.loadAlumnos() })).subscribe();
+     
+      
     }
   }
 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AlumnosComponent } from './alumnos/alumnos.component';
 import { adminGuard } from '../../core/guards/admin.guard';
 
 
@@ -24,10 +23,12 @@ const routes: Routes = [
     canActivate: [adminGuard],
     loadChildren: () => import ('./usuarios/usuarios.module').then((m) => m.UsuariosModule)
     },
-  
+
+   
   {path:'**',
     redirectTo: "/dashboard/home"
   },
+ 
  
 ];
 

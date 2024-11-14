@@ -8,9 +8,8 @@ import { environment } from "../../../environments/environment";
 @Injectable({ providedIn: 'root' })
 
 export class AlumnosService {
-
-
-
+  
+ 
   constructor(private httpClient: HttpClient) { }
 
 
@@ -31,8 +30,9 @@ export class AlumnosService {
     ;
   }
 
-}
 
+
+};
 
 
 

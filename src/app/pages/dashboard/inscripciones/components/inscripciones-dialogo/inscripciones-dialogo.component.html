@@ -1,32 +1,23 @@
-<h2 mat-dialog-title> 
-    {{ inscribirAlumno ? "Inscribir: "  : "Inscribir Alumno" }} 
-  </h2>
-  
-  <mat-dialog-content>
-    <form [formGroup]="inscripcionForm">
-      <mat-form-field class="w-full">
-        <mat-label> Nombre:  </mat-label>
-        <input formControlName="alumno" matInput />
-        <mat-error>El campo es obligatorio</mat-error>
-      </mat-form-field>
-  
-      <mat-form-field class="w-full">
-        <mat-label> Curso:  </mat-label>
-        <input formControlName="curso" matInput />
-        <mat-error>El campo es obligatorio</mat-error>
-      </mat-form-field>
-  
-      <mat-form-field class="w-full">
-        <mat-label>Fecha de Inscripción</mat-label>
-        <input formControlName="fechaInscripcion" matInput [matDatepicker]="picker">
-        <mat-hint>DD/MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </form>
-  </mat-dialog-content>
-  
-  <mat-dialog-actions>
-    <button mat-dialog-close mat-button> Cancelar </button>
-    <button (click)="onSubmit()" mat-button> Guardar </button>
-  </mat-dialog-actions>
+<h2>INSCRIPCION</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Alumno</mat-label>
+  <mat-select [(ngModel)]="selectedAlumnoId" required>
+    <mat-option *ngFor="let alumno of alumnos" [value]="alumno.id">{{ alumno.nombre }} {{ alumno.apellido }}</mat-option>
+  </mat-select>
+
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Curso</mat-label>
+  <mat-select  [(ngModel)]="selectedCursoId" required>
+    <mat-option *ngFor="let curso of cursos" [value]="curso.id">{{ curso.nombre }}</mat-option>
+  </mat-select>
+
+</mat-form-field>
+
+<mat-dialog-actions>
+  <button mat-dialog-close mat-button > Cancelar </button>
+  <button (click)="onSubmit()" mat-button> Inscribir </button>
+  <button (click)="openDialog()" mat-button><mat-icon>add</mat-icon> Agregar Alumno </button>
+ 
+</mat-dialog-actions>

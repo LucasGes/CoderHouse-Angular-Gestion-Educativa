@@ -1,1 +1,46 @@
-<p>AAAAAAAAAAAAAA!</p>
+<h2 >USUARIOS</h2>
+
+ 
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombreCompleto">
+    <th mat-header-cell *matHeaderCellDef> NOMBRE Y APELLIDO</th>
+    <td mat-cell *matCellDef="let element"> {{element | nombreCompleto}} </td>
+  </ng-container>
+
+     <ng-container matColumnDef="rol">
+    <th mat-header-cell *matHeaderCellDef> ROL </th>
+    <td mat-cell *matCellDef="let element" > {{element.rol}} </td>
+  </ng-container>
+
+     <ng-container matColumnDef="acciones" class="aling-center">
+    <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
+    <td mat-cell *matCellDef="let element"> 
+    
+      <button (click)="verUsuario(element)" mat-icon-button>
+        <mat-icon>visibility</mat-icon>
+      </button>
+     <button (click)="editarUsuario(element)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="deleteUsuariobyID(element.id)" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+      
+    </td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<div style="margin-top: 20px;">
+  <button (click)="openDialog()" mat-flat-button>
+    <mat-icon>add</mat-icon> Agregar Usuario </button>
+</div>

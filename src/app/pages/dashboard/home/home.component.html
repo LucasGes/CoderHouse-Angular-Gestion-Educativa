@@ -1,5 +1,14 @@
-<h1 class="welcome-message">BIENVENIDO/A</h1>
-<h1 class="welcome-message">Escuela San Martin</h1>
+<img src="assets/images/Logo2.png" alt="Logo Escuela San Martín" class="logo">
+
+<div class="list">
+   
+  <button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" mat-raised-button  class="button" [routerLink]="['/dashboard/usuarios']">Usuarios</button>
+  <button mat-raised-button  class="button" [routerLink]="['/dashboard/cursos']"> Curso</button>
+  <button mat-raised-button  class="button"[routerLink]="['/dashboard/alumnos']">Alumnos</button>
+  <button mat-raised-button  class="button"[routerLink]="['/dashboard/inscripciones']">Inscripcones</button>
+
+</div>
+
 
 
 

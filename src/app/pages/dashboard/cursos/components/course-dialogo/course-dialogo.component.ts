@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Curso } from '../../models/index';
+import { Observable } from 'rxjs';
+import { Usuario } from '../../../usuarios/models';
 @Component({
   selector: 'app-course-dialogo',
   templateUrl: './course-dialogo.component.html',
@@ -10,10 +12,13 @@ import { Curso } from '../../models/index';
 
 export class CourseDialogoComponent {
   courseForm: FormGroup;
-
+  
+  
   constructor(private fb: FormBuilder,private matDialogRef: MatDialogRef<CourseDialogoComponent>,
     
     @Inject(MAT_DIALOG_DATA) public editarCurso? : Curso) {
+
+    
 
 
     this.courseForm = this.fb.group({
@@ -21,7 +26,7 @@ export class CourseDialogoComponent {
 
       nombre: [null, Validators.required],
       docente: [null, Validators.required],
-      alumnos: [null, Validators.required],
+      horas: [null, Validators.required],
       fechaInicio: [null, Validators.required],
       fechaFin: [null, Validators.required]
   
