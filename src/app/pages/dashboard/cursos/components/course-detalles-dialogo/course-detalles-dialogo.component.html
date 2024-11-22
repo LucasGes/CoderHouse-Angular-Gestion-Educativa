@@ -1,26 +1,29 @@
 <mat-card *ngIf="course">
-    <h2 style="color: white;"> {{ course.nombre }}</h2>
-    <mat-card-header >
-         <mat-card-subtitle class="description">DOCENTE: {{course.docente}}</mat-card-subtitle>
-         <mat-card-subtitle class="description">CANT. HORAS: {{course.horas}}</mat-card-subtitle>
-         <mat-card-subtitle class="description">FECHA INICIO: {{course.fechaInicio | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
-         <mat-card-subtitle class="description">FECHA FIN: {{course.fechaFin | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
-         <mat-card-subtitle class="description">ALUMNOS INSCRIPTOS: {{course.cantAlumnos?.length || 0}}</mat-card-subtitle>
-         
-         
-         <mat-form-field appearance="fill" class="description">
-          <mat-label>LISTA DE ALUMNOS</mat-label>
-          <mat-select >
-            <mat-option *ngFor="let curso of cursos" [value]="curso.id">
-              {{ course.cantAlumnos }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-    </mat-card-header>
+  <h2 style="color: white;">{{ course.nombre }}</h2>
+  <mat-card-header>
+    <mat-card-subtitle class="description">DOCENTE: {{ course.docente }}</mat-card-subtitle>
+    <mat-card-subtitle class="description">CANT. HORAS: {{ course.horas }}</mat-card-subtitle>
+    <mat-card-subtitle class="description">FECHA INICIO: {{ course.fechaInicio | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+    <mat-card-subtitle class="description">FECHA FIN: {{ course.fechaFin | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+    <mat-card-subtitle class="description">INSCRIPTOS: {{ course.cantAlumnos?.length || 0 }}</mat-card-subtitle>
+       
+  </mat-card-header>
+  <div fxLayout="column" fxLayoutGap="10px">
+     
+    <button mat-raised-button (click)="mostrarLista()">
+      {{ lista ? 'Ocultar Lista' : 'Mostrar Lista' }}
+    </button>
+
    
-    <mat-dialog-actions fxLayoutAlign="end center">
-      <button mat-dialog-close mat-button>Volver</button>
-  
-    </mat-dialog-actions>
-  </mat-card>
-  
+    <div *ngIf="lista">
+      <ol style=" color: #ffffff;">
+        <li *ngFor="let alumno of alumnosInscritos">
+          {{ alumno.nombre }} {{ alumno.apellido }}
+        </li>
+      </ol>
+    </div>
+  </div>
+  <mat-dialog-actions fxLayoutAlign="end center">
+    <button mat-dialog-close mat-button>Volver</button>
+  </mat-dialog-actions>
+</mat-card>

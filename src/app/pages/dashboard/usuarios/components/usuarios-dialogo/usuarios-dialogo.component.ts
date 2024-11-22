@@ -2,6 +2,7 @@ import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder,  FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Usuario } from '../../models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -19,8 +20,13 @@ export class UsuariosDialogoComponent {
   }
   
 
-  constructor(private fb: FormBuilder,private matDialogRef: MatDialogRef<UsuariosDialogoComponent>,
-    @Inject(MAT_DIALOG_DATA) public editarUsuario? : Usuario
+  constructor(
+   
+    private fb: FormBuilder,
+    private matDialogRef: MatDialogRef<UsuariosDialogoComponent>,
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) 
+    public editarUsuario? : Usuario, 
   ) {
 
     this.userForm = this.fb.group({
@@ -50,11 +56,12 @@ if (this.editarUsuario){
    if (this.userForm.valid){
     this.matDialogRef.close(this.userForm.value)
    }else{
-    alert('Por favor, complete los campos obligatorios.');
-
-  }
+    this.snackBar.open('Complete todos los datos', 'Cerrar', {
+      duration: 3000,
+      panelClass: 'error-snack-bar',
+  })
      
   }
-
-
 }
+}
+

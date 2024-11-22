@@ -30,6 +30,7 @@ import { InscripcionesModule } from './inscripciones/inscripciones.module';
     MatCardModule,
     MatListModule,
     SharedModule,
+     
     
   
   InscripcionesModule]

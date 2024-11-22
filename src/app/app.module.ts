@@ -42,6 +42,7 @@ export const MY_DATE_FORMATS = {
     MatNativeDateModule,
     StoreModule.forRoot(rootReducer, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+     
   
   ],
 

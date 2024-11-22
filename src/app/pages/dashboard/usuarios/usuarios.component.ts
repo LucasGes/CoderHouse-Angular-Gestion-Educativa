@@ -2,12 +2,11 @@ import { Component, InjectionToken, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Usuario } from './models';
 import { generateID } from '../../../shared/utils';
-import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { UsuariosService } from '../../../core/services/usuarios.service';
 import { UsuariosDialogoComponent } from './components/usuarios-dialogo/usuarios-dialogo.component';
-import { ActivatedRoute } from '@angular/router';
 import { UsuariosDetallesDialogoComponent } from './components/usuarios-detalles-dialogo/usuarios-detalles-dialogo.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -19,13 +18,10 @@ import { UsuariosDetallesDialogoComponent } from './components/usuarios-detalles
 
 export class UsuariosComponent implements OnInit { 
 
-
-
   constructor(
     private matDialog: MatDialog, 
     private usuariosService: UsuariosService, 
-    private httpClient: HttpClient, 
-    private route: ActivatedRoute) { }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadUsuarios();
@@ -101,9 +97,31 @@ export class UsuariosComponent implements OnInit {
 
 
   deleteUsuariobyID(id: string) {
-    if (confirm('Desea eliminar el usuario?')) {
-      this.usuariosService.deleteUsuario(id).pipe(tap(() => { this.loadUsuarios() })).subscribe();
-    }
+
+    const snackBarRef = this.snackBar.open('¿Desea eliminar el usuario?', 'Eliminar',  {
+      duration: 2000, 
+      panelClass: 'warning-snack-bar',
+    });
+  snackBarRef.onAction().subscribe(() => {
+    // El usuario hizo clic en "Eliminar"
+    this.usuariosService.deleteUsuario(id).pipe(
+      tap(() => {
+        this.loadUsuarios(); 
+        this.snackBar.open('Usuario eliminado con éxito', 'Cerrar', {
+          duration: 3000,
+          panelClass: 'success-snack-bar',
+        });
+      })
+    ).subscribe();
+  });
+
+  }
+
+  showSnackBar(message: string, type: 'success' | 'error'): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 4000,
+      panelClass: type === 'success' ? 'success-snack-bar' : 'error-snack-bar', 
+    });
   }
 
 }

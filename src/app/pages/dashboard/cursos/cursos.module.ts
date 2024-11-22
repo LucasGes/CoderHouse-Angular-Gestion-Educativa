@@ -16,6 +16,7 @@ import { MatNativeDateModule, MatOption } from '@angular/material/core';
 import { CourseDetallesDialogoComponent } from './components/course-detalles-dialogo/course-detalles-dialogo.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelect } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
 
 
 
@@ -44,7 +45,8 @@ import { MatSelect } from '@angular/material/select';
     MatButtonModule,
     MatCardModule,
     MatSelect,
-    MatOption
+    MatOption,
+    MatListModule 
    
     ]
     

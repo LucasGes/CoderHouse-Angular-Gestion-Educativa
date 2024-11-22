@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { AuthRoutingModule } from '../auth-routing.module';
 import { AppRoutingModule } from '../../../app-routing.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 describe('LoginComponent', () => {
@@ -29,7 +30,9 @@ describe('LoginComponent', () => {
         MatSelectModule,
         MatButtonModule,
         ReactiveFormsModule,
-        AppRoutingModule],
+        AppRoutingModule,
+        MatSnackBarModule
+      ],
       providers: [provideAnimationsAsync(),]
     })
       .compileComponents();

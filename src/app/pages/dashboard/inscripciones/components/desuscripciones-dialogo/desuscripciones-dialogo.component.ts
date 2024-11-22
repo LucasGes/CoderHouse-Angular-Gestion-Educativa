@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AlumnosService } from '../../../../../core/services/alumnos.service';
 import { CursosService } from '../../../../../core/services/cursos.service';
 import { Alumno } from '../../../alumnos/models';
 import { Curso } from '../../../cursos/models';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-desuscripciones-dialogo',
@@ -10,18 +11,23 @@ import { Curso } from '../../../cursos/models';
   styleUrl: './desuscripciones-dialogo.component.scss'
 })
 export class DesuscripcionesDialogoComponent implements OnInit {
-  alumnos: Alumno[] = []; 
+
+
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public alumno: Alumno,
+    private alumnosService: AlumnosService,
+    private cursoService: CursosService,
+
+  ) { }
+
+  alumnos: Alumno[] = [];
   cursos: Curso[] = [];
+  cursosInscriptos: Curso[] = [];
   selectedAlumnoId: string = '';
-  selectedCursoId: string = ''; 
+  selectedCursoId: string = '';
 
-
-  constructor (
-    private alumnosService: AlumnosService, 
-    private cursoService: CursosService, 
-    
-     ){}
-  
   ngOnInit(): void {
     this.cargarAlumnos();
     this.cargarCursos();
@@ -30,70 +36,71 @@ export class DesuscripcionesDialogoComponent implements OnInit {
 
   cargarAlumnos(): void {
     this.alumnosService.getAlumnos().subscribe(alumnos => {
-      this.alumnos = alumnos; 
+      this.alumnos = alumnos;
     });
   }
 
-  
+
   cargarCursos(): void {
     if (!this.selectedAlumnoId) {
-      this.cursos = []; 
+      this.cursosInscriptos = [];
       return;
     }
-  
-   
+
     const alumno = this.alumnos.find(a => a.id === this.selectedAlumnoId);
-  
+
     if (alumno) {
-      
       this.cursoService.getCursos().subscribe(cursos => {
-        
-        this.cursos = cursos.filter(curso => alumno.cursos.includes(curso.id));
+
+        this.cursosInscriptos = cursos.filter(curso => alumno.cursos?.includes(curso.nombre));
       });
     }
   }
 
-nombreAlumno = "";
-dataSource: Alumno[] = [];
 
-loadAlumnos() {
+  nombreAlumno = "";
+  dataSource: Alumno[] = [];
 
-  this.alumnosService.getAlumnos().subscribe({
-    next: (alumnos) => {
-      this.dataSource = alumnos;
-    }    
-  })
+  loadAlumnos() {
 
-}
+    this.alumnosService.getAlumnos().subscribe({
+      next: (alumnos) => {
+        this.dataSource = alumnos;
+      }
+    })
 
-
-desuscribirAlumno(): void {
-
-  if (!this.selectedAlumnoId || !this.selectedCursoId) {
-    alert('Por favor, complete los campos obligatorios.');
-    return;
   }
 
-  // Encuentra al alumno seleccionado
-  const alumno = this.alumnos.find(a => a.id === this.selectedAlumnoId);
-  if (alumno) {
-    // Elimina el curso seleccionado de la lista de cursos del alumno
-    alumno.cursos = alumno.cursos.filter(cursoId => cursoId !== this.selectedCursoId);
 
-    // Llama al servicio para actualizar el alumno en la base de datos
-    this.alumnosService.editAlumno(alumno.id, alumno).subscribe({
-      next: () => {
-        alert('Alumno desuscripto con éxito');
-        this.cargarCursos(); // Actualiza la lista de cursos disponibles en el selector
-      },
-      error: () => alert('Error al desuscribir al alumno')
-    });
+  desuscribirAlumno(): void {
+    if (!this.selectedAlumnoId || !this.selectedCursoId) {
+      alert('Por favor, seleccione un alumno y un curso.');
+      return;
+    }
+
+
+    const alumno = this.alumnos.find(a => a.id === this.selectedAlumnoId);
+
+    if (alumno) {
+
+      alumno.cursos = alumno.cursos.filter(curso => curso !== this.selectedCursoId);
+
+      this.alumnosService.editAlumno(alumno.id, alumno).subscribe({
+        next: () => {
+          alert('Alumno desuscripto con éxito');
+          this.cargarCursos();
+          this.loadAlumnos();
+        },
+        error: () => {
+          alert('Error al desuscribir al alumno');
+        }
+      });
+    }
   }
-}
 
-onSubmit(): void {
-  this.desuscribirAlumno();
-}
+  onSubmit(): void {
+    this.desuscribirAlumno();
+  }
 
 }
 
