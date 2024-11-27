@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AlumnosService } from '../../../../../core/services/alumnos.service';
 import { Alumno } from '../../../alumnos/models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-alumno-dialogo',
@@ -18,6 +19,7 @@ export class AlumnoDialogoComponent {
     private fb: FormBuilder,
     private matDialogRef: MatDialogRef<AlumnoDialogoComponent>,
     private alumnosService: AlumnosService,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public editarAlumno?: Alumno
   ) {
     this.studentForm = this.fb.group({
@@ -45,9 +47,15 @@ export class AlumnoDialogoComponent {
     if (this.studentForm.valid) {
       this.cargarTotalAlumnos();
       this.matDialogRef.close(this.studentForm.value)
-      alert('Alumno dado de alta.');
+      this.snackBar.open('Alumno dado de alta', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'success-snack-bar',
+      })
     } else {
-      alert('Por favor, complete los campos obligatorios.');
+      this.snackBar.open('Completar todos los datos', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'error-snack-bar',
+      });
     }
   }
 }

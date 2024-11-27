@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlumnoDialogoComponent } from '../alumno-dialogo/alumno-dialogo.component';
 import { generateID } from '../../../../../shared/utils';
 import { tap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -25,8 +26,8 @@ export class InscripcionesDialogoComponent  implements OnInit {
   constructor (
     private alumnosService: AlumnosService, 
     private cursoService: CursosService, 
+    private snackBar: MatSnackBar,
     private matDialog: MatDialog, 
-    
      ){}
   
   ngOnInit(): void {
@@ -50,7 +51,10 @@ export class InscripcionesDialogoComponent  implements OnInit {
 
 onSubmit(): void {
   if (!this.selectedAlumnoId || !this.selectedCursoId) {
-    alert('Por favor, complete los campos obligatorios.');
+    this.snackBar.open('Complete todos los datos', 'Cerrar', {
+      duration: 3000,
+      panelClass: 'error-snack-bar',
+  })
     return;
   }
 
@@ -62,8 +66,10 @@ onSubmit(): void {
 
     if (curso.cantAlumnos.includes(this.selectedAlumnoId)) {
 
-       alert('Alumno ya inscrito en este curso');
-       
+      this.snackBar.open('Alumno ya inscripto en el curso', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'error-snack-bar',
+      })
              return;
     }
 
@@ -75,7 +81,10 @@ onSubmit(): void {
     this.cursoService.editCurso(curso.id, curso).subscribe(() => {
       
       
-      alert('Alumno inscrito correctamente en el curso');
+      this.snackBar.open('Alumno inscripto correctamente en el curso', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'success-snack-bar',
+      })
     
     }).closed;
 
@@ -103,19 +112,6 @@ loadAlumnos() {
   })
 
 }
-openDialog(): void {
-  this.matDialog.open(AlumnoDialogoComponent).afterClosed().subscribe({
 
-    next: (value) => {
-
-      this.nombreAlumno = value.name;
-
-      value['id'] = generateID(4);
-
-
-      this.alumnosService.addAlumno(value).pipe(tap(() => this.loadAlumnos())).subscribe();
-    }
-  })
-}
 
 }

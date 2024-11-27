@@ -9,6 +9,7 @@ import { tap } from 'rxjs';
 import { AlumnosDetallesDialogoComponent } from './components/alumnos-detalles-dialogo/alumnos-detalles-dialogo.component';
 import { CursosService } from '../../../core/services/cursos.service';
 import { Curso } from '../cursos/models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -19,9 +20,10 @@ import { Curso } from '../cursos/models';
 export class AlumnosComponent implements OnInit {
 
   constructor(
-    
-    private matDialog: MatDialog, 
-    private alumnosService: AlumnosService, 
+
+    private matDialog: MatDialog,
+    private alumnosService: AlumnosService,
+    private snackBar: MatSnackBar,
     private httpClient: HttpClient,
     private cursoService: CursosService) { }
 
@@ -29,20 +31,18 @@ export class AlumnosComponent implements OnInit {
     this.loadAlumnos();
   }
 
-  
+
   loadAlumnos() {
 
     this.alumnosService.getAlumnos().subscribe({
       next: (alumnos) => {
         this.dataSource = alumnos;
-      }    
+      }
     })
 
   }
 
-
   nombreAlumno = ""
-
 
   openDialog(): void {
     this.matDialog.open(AlumnosDialogoComponent).afterClosed().subscribe({
@@ -59,7 +59,6 @@ export class AlumnosComponent implements OnInit {
     })
   }
 
-
   displayedColumns: string[] = ['id', 'nombreCompleto', 'fechaInscripcion', 'acciones'];
   dataSource: Alumno[] = [];
 
@@ -72,11 +71,9 @@ export class AlumnosComponent implements OnInit {
         }
       }
     });
-
-  
   }
 
-  verAlumno (alumno  : Alumno){
+  verAlumno(alumno: Alumno) {
     this.matDialog.open(AlumnosDetallesDialogoComponent, { data: alumno }).afterClosed().subscribe({
       next: (value) => {
 
@@ -84,16 +81,49 @@ export class AlumnosComponent implements OnInit {
           this.loadAlumnos();
         }
       }
-  });
+    });
   }
-    
+
   deleteAlumnobyID(id: string) {
-   
-    if (confirm('Desea eliminar el alumno?')) {
-      this.alumnosService.deleteAlumno(id).pipe(tap(() => { this.loadAlumnos() })).subscribe();
-     
-      
-    }
+    const snackBarRef = this.snackBar.open('¿Desea eliminar al alumno?', 'Eliminar', {
+      duration: 2000,
+      panelClass: 'error-snack-bar',
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+
+      this.alumnosService.deleteAlumno(id).pipe(
+        tap(() => {
+          this.loadAlumnos();  // Recargar lista de alumnos
+
+          this.cursoService.getCursos().subscribe((cursos: Curso[]) => {
+            cursos.forEach(curso => {
+              
+              if (curso.cantAlumnos.includes(id)) {
+               
+                curso.cantAlumnos = curso.cantAlumnos.filter(alumnoId => alumnoId !== id);
+
+                this.cursoService.editCurso(curso.id, curso).subscribe();
+              }
+            });
+          });
+
+
+          this.snackBar.open('Alumno eliminado con éxito', 'Cerrar', {
+            duration: 3000,
+            panelClass: 'success-snack-bar',
+          });
+        })
+      ).subscribe();
+    });
+    snackBarRef.afterDismissed().subscribe(info => {
+      if (!info.dismissedByAction) {
+        this.snackBar.open('Acción cancelada', 'Cerrar', {
+          duration: 3000,
+          panelClass: 'error-snack-bar',
+        });
+      }
+    });
   }
 
 }

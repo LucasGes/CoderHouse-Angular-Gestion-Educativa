@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { RootState } from '../../../core/store';
 import { Usuario } from '../usuarios/models';
 import { selectAuthUser } from '../../../core/store/auth/auth.selectors';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -23,7 +24,14 @@ export class CursosComponent implements OnInit {
   
   authUser$: Observable<Usuario | null>;
 
-  constructor(private matDialog: MatDialog, private store: Store<RootState>, private cursosService: CursosService, private httpClient: HttpClient){
+  constructor(
+    
+    private matDialog: MatDialog, 
+    private store: Store<RootState>, 
+    private cursosService: CursosService, 
+    private httpClient: HttpClient,
+    private snackBar: MatSnackBar,
+  ){
 
     this.authUser$ = this.store.select(selectAuthUser);
 
@@ -88,12 +96,33 @@ export class CursosComponent implements OnInit {
     });
 
   }
-
-
   deleteCursobyID(id: string) {
-    if (confirm('Desea eliminar el alumno?')) {
-      this.cursosService.deleteCurso(id).pipe(tap(() => { this.loadCursos() })).subscribe();
+
+    const snackBarRef = this.snackBar.open('¿Desea eliminar el curso?', 'Eliminar',  {
+      duration: 2000, 
+      panelClass: 'warning-snack-bar',
+    });
+  snackBarRef.onAction().subscribe(() => {
+    this.cursosService.deleteCurso(id).pipe(
+      tap(() => { 
+        this.loadCursos(); 
+        this.snackBar.open('Curso eliminado con éxito', 'Cerrar', {
+      duration: 3000,
+      panelClass: 'success-snack-bar',
+    }); })).subscribe();
+  });
+
+  snackBarRef.afterDismissed().subscribe(info => {
+    if (!info.dismissedByAction) {
+      this.snackBar.open('Acción cancelada', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'info-snack-bar',
+      });
     }
+  });
+  
+
   }
+
 
 }

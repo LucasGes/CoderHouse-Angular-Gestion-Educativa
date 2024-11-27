@@ -4,6 +4,7 @@ import { CursosService } from '../../../../../core/services/cursos.service';
 import { Alumno } from '../../../alumnos/models';
 import { Curso } from '../../../cursos/models';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-desuscripciones-dialogo',
@@ -12,13 +13,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DesuscripcionesDialogoComponent implements OnInit {
 
-
-
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public alumno: Alumno,
     private alumnosService: AlumnosService,
     private cursoService: CursosService,
+    private snackBar: MatSnackBar,
 
   ) { }
 
@@ -68,35 +68,54 @@ export class DesuscripcionesDialogoComponent implements OnInit {
         this.dataSource = alumnos;
       }
     })
-
   }
 
 
   desuscribirAlumno(): void {
+
     if (!this.selectedAlumnoId || !this.selectedCursoId) {
-      alert('Por favor, seleccione un alumno y un curso.');
+      this.snackBar.open('Seleccionar un alumno y un curso', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'error-snack-bar',
+      });
       return;
     }
 
-
     const alumno = this.alumnos.find(a => a.id === this.selectedAlumnoId);
-
-    if (alumno) {
-
-      alumno.cursos = alumno.cursos.filter(curso => curso !== this.selectedCursoId);
-
-      this.alumnosService.editAlumno(alumno.id, alumno).subscribe({
-        next: () => {
-          alert('Alumno desuscripto con éxito');
-          this.cargarCursos();
-          this.loadAlumnos();
-        },
-        error: () => {
-          alert('Error al desuscribir al alumno');
-        }
+    const curso = this.cursosInscriptos.find(c => c.id === this.selectedCursoId);
+    const cursoSeleccionado = this.cursosInscriptos.find(curso => curso.id === this.selectedCursoId);
+    
+    if (!alumno || !curso || !cursoSeleccionado) {
+      this.snackBar.open('Alumno no encontrado', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'error-snack-bar',
       });
+      return;
     }
-  }
+
+    const nombreCurso = cursoSeleccionado.nombre;
+
+    alumno.cursos = alumno.cursos.filter(cursoNombre => cursoNombre !== nombreCurso);
+
+    curso.cantAlumnos = curso.cantAlumnos.filter(alumnoId => alumnoId !== this.selectedAlumnoId);
+
+    this.alumnosService.editAlumno(alumno.id, alumno).subscribe({
+
+      next: () => {
+        this.cursoService.editCurso(curso.id, curso).subscribe({
+          next: () => {
+            this.snackBar.open('Alumno desuscripto correctamente', 'Cerrar', {
+              duration: 3000,
+              panelClass: 'success-snack-bar',
+            });
+            this.cargarCursos();
+            this.loadAlumnos();
+          }
+        });
+      }
+    })
+  };
+
 
   onSubmit(): void {
     this.desuscribirAlumno();

@@ -35,7 +35,7 @@ describe('AlumnosService', () => {
                 nombre: 'Lucas',
                 apellido: 'Garcia',
                 fechaInscripcion: new Date('2020-03-02'),
-
+                cursos: []
             }
         ]
         service.getAlumnos().subscribe({

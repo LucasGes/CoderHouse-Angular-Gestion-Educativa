@@ -49,12 +49,17 @@ export class UsuariosDialogoComponent {
 
 if (this.editarUsuario){
     this.userForm.patchValue(this.editarUsuario); 
-}
+    }
 }
   
   onSubmit(): void{
    if (this.userForm.valid){
     this.matDialogRef.close(this.userForm.value)
+    this.snackBar.open('Usuario creado correctamente', 'Cerrar', {
+      duration: 3000,
+      panelClass: 'success-snack-bar',
+})
+    
    }else{
     this.snackBar.open('Complete todos los datos', 'Cerrar', {
       duration: 3000,

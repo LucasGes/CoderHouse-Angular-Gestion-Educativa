@@ -10,8 +10,8 @@
 <mat-form-field appearance="fill">
   <mat-label>Curso</mat-label>
   <mat-select [(ngModel)]="selectedCursoId">
-    <mat-option *ngFor="let curso of cursosInscriptos" [value]="curso.nombre">
-      {{ curso.nombre }}
+    <mat-option *ngFor="let curso of cursosInscriptos" [value]="curso.id">
+      {{curso.id}} {{ curso.nombre }}
     </mat-option>
   </mat-select>
 </mat-form-field>

@@ -50,3 +50,15 @@ h2{
   font-size: 20PX;
   text-align: center;
 }
+
+.success-snack-bar {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+.error-snack-bar {
+  background-color: #f44336;
+  color: white;
+  font-weight: bold;
+}

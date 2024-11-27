@@ -103,8 +103,7 @@ export class UsuariosComponent implements OnInit {
       panelClass: 'warning-snack-bar',
     });
   snackBarRef.onAction().subscribe(() => {
-    // El usuario hizo clic en "Eliminar"
-    this.usuariosService.deleteUsuario(id).pipe(
+       this.usuariosService.deleteUsuario(id).pipe(
       tap(() => {
         this.loadUsuarios(); 
         this.snackBar.open('Usuario eliminado con éxito', 'Cerrar', {
@@ -114,6 +113,16 @@ export class UsuariosComponent implements OnInit {
       })
     ).subscribe();
   });
+
+  snackBarRef.afterDismissed().subscribe(info => {
+    if (!info.dismissedByAction) {
+      this.snackBar.open('Acción cancelada', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'info-snack-bar',
+      });
+    }
+  });
+  
 
   }
 

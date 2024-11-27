@@ -4,6 +4,9 @@ import { Alumno } from '../alumnos/models';
 import { MatDialog } from '@angular/material/dialog';
 import { InscripcionesDialogoComponent } from './components/inscripciones-dialogo/inscripciones-dialogo.component';
 import { DesuscripcionesDialogoComponent } from './components/desuscripciones-dialogo/desuscripciones-dialogo.component';
+import { AlumnoDialogoComponent } from './components/alumno-dialogo/alumno-dialogo.component';
+import { generateID } from '../../../shared/utils';
+import { tap } from 'rxjs';
 
 
 @Component({
@@ -45,5 +48,41 @@ export class InscripcionesComponent implements OnInit {
   openDialogD(): void {
     this.matDialog.open(DesuscripcionesDialogoComponent)
        
+  }
+  
+  nombreAlumno = '';
+  dataSource: Alumno[] = [];
+  selectedAlumnoId: string = '';
+
+  loadAlumnos() {
+
+    this.alumnosService.getAlumnos().subscribe({
+      next: (alumnos) => {
+        this.dataSource = alumnos;
+      }    
+    })
+  
+  }
+
+  openDialog(): void {
+    this.matDialog.open(AlumnoDialogoComponent).afterClosed().subscribe({
+  
+      next: (value) => {
+  
+        this.nombreAlumno = value.name;
+  
+        value['id'] = generateID(4);
+  
+  
+        this.alumnosService.addAlumno(value).pipe(
+          tap(() => {
+            this.loadAlumnos();
+            this.cargarAlumnos();
+            this.selectedAlumnoId = '';
+          })
+  
+        ).subscribe();
+      }
+    })
   }
 }

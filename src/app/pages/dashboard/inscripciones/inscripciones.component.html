@@ -4,21 +4,24 @@
     <mat-spinner></mat-spinner>
 </div>
 
-<div *ngIf="!isLoading">
+<div *ngIf="!isLoading" style="margin-top: 40px;">
     <p class="mat-body-1" style=" text-align: center; color: white;"> CANTIDAD DE ALUMNOS: {{ totalAlumnos }}</p>
 </div>
 
 
 
-<div style="margin-top: 20px;">
+<div style="display: flex; justify-content: space-around; margin-top: 40px;">
+
     <button (click)="openDialogI()" mat-flat-button>
         <mat-icon>add</mat-icon> INSCRIBIR
     </button>
-</div>
 
-<div style="margin-top: 20px;">
     <button (click)="openDialogD()" mat-flat-button>
         <mat-icon>delete</mat-icon> DESUSCRIBIR
     </button>
-    
+        
 </div>
+
+<button (click)="openDialog()" mat-flat-button style="display: block; margin: 40px auto; text-align: center;">
+    <mat-icon>add</mat-icon> ALTA ALUMNO 
+</button>
