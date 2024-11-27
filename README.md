@@ -1,27 +1,24 @@
-# PfGesquaEscSanMartin
+# Proyecto Final: Gestión Educativa.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+Este proyecto es el resultado final de un curso de Angular realizado en CoderHouse. 
+El sistema permite gestionar alumnos y cursos, incluyendo la inscripción y desuscripción de alumnos en cursos, y la eliminación de registros.
 
-## Development server
+## Tecnologías utilizadas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Angular**: Framework principal utilizado para el desarrollo del frontend.
+- **Angular Material**: Componentes de UI para mejorar la experiencia del usuario.
+- **RxJS**: Librería para manejar operaciones asincrónicas.
+- **Json-Server** (opcional): Usado para simular un backend RESTful durante el desarrollo.
 
-## Code scaffolding
+## Características
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Gestión de alumnos**: Registrar, editar y eliminar alumnos.
+- **Gestión de cursos**: Crear y eliminar cursos.
+- **Inscripción de alumnos a cursos**: Los alumnos pueden inscribirse y desinscribirse de cursos.
+- **Interfaz de usuario con Angular Material**: Uso de componentes como `MatDialog`, `MatSnackBar` y `MatTable` para una interfaz interactiva.
 
-## Build
+## Instalación
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Clonar el repositorio
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+   git clone https://github.com/tu-usuario/nombre-del-repositorio.git
